@@ -1,4 +1,4 @@
-#include<fstream>
+#include<fstream.h>
 
 #include<dos.h>
 
@@ -10,9 +10,9 @@
 
 #include<string.h>
 
-#include<iomanip>
+#include<iomanip.h>
 
-//#include<graphics.h>
+#include<graphics.h>
 
 
 
@@ -29,15 +29,15 @@
          char empcode[5];
 
          char name[40];
-     int age;
+         int age;
 
-     float sal;
+         float sal;
 
-     int day;
+         int day;
 
-     int month;
+         int month;
 
-     int year;
+         int year;
 
      }p;//object of structure person
 
@@ -45,26 +45,26 @@
 
      public:
 
-group();
+    group();
 
 
 
-void addrec();
+    void addrec();
 
-void listrec();
+    void listrec();
 
-void modirec();
+    void modirec();
 
-void delrec();
+    void delrec();
 
-void recallrec();
+    void recallrec();
 
-void packrec();
+    void packrec();
 
-void credit();
+    void credit();
 
-void exit();
-};//end of class
+    void exit();
+};//end of class
 
 
 
@@ -85,18 +85,10 @@ struct dosdate_t d;
 
 _dos_getdate(&d);
 
-     // p.day=d.day;
-
-     //     p.month=d.month;
-
-     //     p.year=d.year;
-
-     //     _dos_getdate(&d);
-
 gotoxy(12,5);
 
 textcolor(5);
-    cout<<"------------------------------------------";
+cout<<"------------------------------------------";
 
 cout<<"\n\t\tWELCOME TO EMPLOYEEMANAGER";
 
@@ -104,32 +96,30 @@ cout<<"\n HERE YOU CAN MANIPULATE THE NECESSARY EMPLOYEE DETAILS";
 
 cout<<"\n\t--------------------------------------------";
 
+cout<<"\n\t\t\tTodays date:";
 
+printf("%d",d.day);
 
-        cout<<"\n\t\t\tTodays date:";
+cout<<"/";
 
-        printf("%d",d.day);
+printf("%d",d.month);
 
-        cout<<"/";
+cout<<"/";
 
-        printf("%d",d.month);
+cout<<d.year;
 
-        cout<<"/";
+gotoxy(12,9);
 
-        cout<<d.year;
+cout<<"abc ltd";
 
-        gotoxy(12,9);
+gotoxy(12,12);
 
-    cout<<"kv afs bagdogra.corporation pvt.ltd";
+cout<<"1.Add record";
 
-    gotoxy(12,12);
+gotoxy(12,13);
 
-    cout<<"1.Add record";
-
-    gotoxy(12,13);
-
-    cout<<"2.List Record";
-gotoxy(12,14);
+cout<<"2.List Record";
+gotoxy(12,14);
 
 cout<<"3.Modify record";
 
@@ -159,12 +149,12 @@ cout<<"Your choice"<<" ";
 
 cin>>choice;
 
-   clrscr();
+clrscr();
 
 
 
 switch(choice)
-{
+{
 
 case '1':
 
@@ -199,7 +189,7 @@ break;
 case'5':
 
 g.recallrec();
-break;
+break;
 
 
 
@@ -230,12 +220,12 @@ exit(0);
     while(choice!=0);
 
 }
-     void group::group()
+
+void group::group()
 
      {
 
-         file.open("Emp.dat",ios::binary|ios::in|
-ios::out);
+         file.open("Emp.dat",ios::binary|ios::in|ios::out);
 
          p.flag=' ';
 
@@ -264,11 +254,9 @@ ios::out);
     struct dosdate_t d;
 
      _dos_getdate(&d);
-         p.day=d.day;
-
-         p.month=d.month;
-
-         p.year=d.year;
+      p.day=d.day;
+      p.month=d.month;
+      p.year=d.year;
 
 
 
@@ -295,7 +283,7 @@ ios::out);
          }
 
      cin>>p.empcode>>p.name>>p.age>>p.sal;
-     p.flag=' ';
+     p.flag=' ';
 
      file.write((char*)&p,sizeof(p));
 
@@ -324,19 +312,14 @@ ios::out);
     cout<<"           "<<"|CODE|"<<"    "<<"|NAME|"<<""<<"|AGE|"<<" "<<"|SALARY|"<<" "<<"|DATED|"<<endl;
 
          //Donot touch Above Line Any Way it is set to give Some Nice Look
-           while(file.read((char*)&p,sizeof(p)))
+     while(file.read((char*)&p,sizeof(p)))
 
      {
 
            if(p.flag!='*')
+               cout<<endl<<"Record#"<<" "<<j++<<setw(6)<<p.empcode<<setw(20)<<p.name<<setw(4)<<p.age<<setw(9)<<p.sal<<"/"<<p.day<<"/"<<p.month<<"/"<<p.year<<endl;
 
-
-
-cout<<endl<<"Record#"<<" "<<j+
-+<<setw(6)<<p.empcode<<setw(20)<<p.name<<setw(4)<<p.
-age<<setw(9)<<p.sal<<"/"<<p.day<<"/"<<p.month<<"/"<<p.year<<endl;
-
-}
+     }
 
 file.clear();
 
@@ -357,7 +340,7 @@ cout<<"Press any key...";
 getch();
 
 }
-else
+else
 
 {
 
@@ -390,7 +373,7 @@ while(file.read((char*)&p,sizeof(p)))
 {
 
 if(strcmp(p.empcode,code)==0)
-{
+{
 
 cout<<endl<<"Enter new record "<<endl;
 
@@ -423,7 +406,7 @@ return;
 count++;
 
 }
-cout<<endl<<"No employee in file with code= "<<code;
+cout<<endl<<"No employee in file with code= "<<code;
 
 getch();
 
@@ -458,7 +441,7 @@ void group::delrec()
      p.flag='*';
 
      pos=count*sizeof(p);
-    file.seekp(pos,ios::beg);
+    file.seekp(pos,ios::beg);
 
     file.write((char*)&p,sizeof(p));
 
@@ -489,7 +472,7 @@ void group::delrec()
          long int pos;
 
          int count=0;
-          cout<<"Enter employee code to be recalled :";
+         cout<<"Enter employee code to be recalled :";
 
           cin>>code;
 
@@ -522,7 +505,7 @@ void group::delrec()
 
 
          count++;
-    }
+    }
 
     cout<<endl<<"No employee in the file with code="<<code;
 
@@ -555,7 +538,7 @@ void group::delrec()
     }
 
     outfile.close();
-     file.close();
+    file.close();
 
      remove("Emp.DAT");
 
@@ -583,9 +566,6 @@ getch();
 void group::credit()
 
 {cout<<"\t\tThis project is made by Mandeep kumar singh";
-
-cout<<"\n\t\t under guidance of MRS Sabiha shahin";
-cout<<"\n\t\tkendriya air force station\n\t\t\tBagdogra";
 
 getch();
 
